@@ -159,13 +159,4 @@ class _CreateStoryState extends State<CreateStory> {
       ),
     );
   }
-
-  Widget listener() {
-    return BlocListener<FacebookCubit, FacebookState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      child: Container(),
-    );
-  }
 }

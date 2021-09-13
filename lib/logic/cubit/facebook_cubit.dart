@@ -12,7 +12,7 @@ class FacebookCubit extends Cubit<FacebookState> {
   static FacebookCubit get(BuildContext context) =>
       BlocProvider.of<FacebookCubit>(context);
 
-  final FacebookRepository _repository = FacebookRepository();
+  final FacebookRepository _repository = FacebookRepository.getInstance();
 
   List<User> users = [];
 

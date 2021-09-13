@@ -6,6 +6,18 @@ import 'package:facebook_app/repository/user_post.dart';
 import 'package:facebook_app/repository/user_story.dart';
 
 class FacebookRepository {
+  FacebookRepository._();
+
+  static FacebookRepository? _instance;
+
+  //Singleton Pattern
+  static FacebookRepository getInstance() {
+    if (_instance == null) {
+      return _instance = FacebookRepository._();
+    }
+    return _instance!;
+  }
+
   Future<List<User>> getAllUsers() async {
     final List<User> users = [];
     await Future.delayed(const Duration(seconds: 2), () {
