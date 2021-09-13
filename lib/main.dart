@@ -6,7 +6,7 @@ import 'package:facebook_app/ui/styled_componants/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'logic/observer.dart';
+import 'observer.dart';
 import 'ui/screens/home/home_screen_mobile.dart';
 
 void main() {

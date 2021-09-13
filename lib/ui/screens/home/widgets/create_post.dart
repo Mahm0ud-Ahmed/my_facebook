@@ -1,7 +1,7 @@
-import 'package:facebook_app/entities/model/post.dart';
-import 'package:facebook_app/entities/model/user.dart';
 import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
 import 'package:facebook_app/logic/state/facebook_state.dart';
+import 'package:facebook_app/model/post.dart';
+import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/platform.dart';
 import 'package:facebook_app/size_config.dart';
 import 'package:facebook_app/ui/constant_ui.dart';
@@ -9,7 +9,6 @@ import 'package:facebook_app/ui/screens/home/widgets/post_react.dart';
 import 'package:facebook_app/ui/screens/home/widgets/react_button.dart';
 import 'package:facebook_app/ui/screens/home/widgets/text_content.dart';
 import 'package:facebook_app/ui/screens/home/widgets/user_info.dart';
-import 'package:facebook_app/ui/styled_componants/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,9 +26,7 @@ class _CreatePostState extends State<CreatePost> {
 
   @override
   void initState() {
-    _cubit = FacebookCubit.get(context)
-      ..getPostData()
-      ..getUserInfo();
+    _cubit = FacebookCubit.get(context)..getPostData();
     super.initState();
   }
 

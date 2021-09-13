@@ -1,4 +1,3 @@
-import 'package:facebook_app/platform.dart';
 import 'package:facebook_app/repository/user_data.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
 import 'package:flutter/material.dart';

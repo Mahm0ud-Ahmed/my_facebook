@@ -1,6 +1,6 @@
-import 'package:facebook_app/entities/model/post.dart';
 import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
 import 'package:facebook_app/logic/state/facebook_state.dart';
+import 'package:facebook_app/model/post.dart';
 import 'package:facebook_app/platform.dart';
 import 'package:facebook_app/size_config.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
@@ -40,6 +40,7 @@ class _TextContentState extends State<TextContent> {
       child: BlocBuilder<FacebookCubit, FacebookState>(
         builder: (context, state) {
           lineState = _cubit.textLineState[widget.post.id]!;
+          // print(widget.post.userId);
           if (widget.post.textBody.isNotEmpty) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,

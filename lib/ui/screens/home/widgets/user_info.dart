@@ -1,5 +1,5 @@
-import 'package:facebook_app/entities/model/post.dart';
-import 'package:facebook_app/entities/model/user.dart';
+import 'package:facebook_app/model/post.dart';
+import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/platform.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
 import 'package:flutter/material.dart';

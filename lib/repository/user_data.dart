@@ -1,4 +1,4 @@
-import 'package:facebook_app/entities/model/user.dart';
+import 'package:facebook_app/model/user.dart';
 
 User myUser = User(
   id: 1,
@@ -21,7 +21,7 @@ List<User> allUser = [
     id: 3,
     userName: 'Jasmin Anas',
     profileImage:
-        'https://image.freepik.com/free-photo/woman-takes-images-holding-photographic-camera-hands_176532-12497.jpg',
+        'https://image.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg',
     state: false,
   ),
   User(

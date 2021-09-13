@@ -1,4 +1,4 @@
-import 'package:facebook_app/entities/model/post.dart';
+import 'package:facebook_app/model/post.dart';
 
 Post myPost = Post(
   id: 1,

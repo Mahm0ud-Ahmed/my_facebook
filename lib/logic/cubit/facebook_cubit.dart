@@ -1,10 +1,8 @@
-import 'package:facebook_app/entities/model/post.dart';
-import 'package:facebook_app/entities/model/story.dart';
-import 'package:facebook_app/entities/model/user.dart';
 import 'package:facebook_app/logic/state/facebook_state.dart';
-import 'package:facebook_app/repository/user_data.dart';
-import 'package:facebook_app/repository/user_post.dart';
-import 'package:facebook_app/repository/user_story.dart';
+import 'package:facebook_app/model/post.dart';
+import 'package:facebook_app/model/story.dart';
+import 'package:facebook_app/model/user.dart';
+import 'package:facebook_app/repository/facebook_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,61 +12,69 @@ class FacebookCubit extends Cubit<FacebookState> {
   static FacebookCubit get(BuildContext context) =>
       BlocProvider.of<FacebookCubit>(context);
 
-  late User user;
+  final FacebookRepository _repository = FacebookRepository();
+
   List<User> users = [];
 
-  late Story story;
   List<Story> stories = [];
 
-  late Post post;
   List<Post> posts = [];
 
   Map<int, bool> textLineState = {};
 
-  void getUserInfo() {
-    clearAllData(users);
+  Future<List<User>> getUserInfo() async {
+    // clearAllData(users);
     emit(LoadingUserFacebookState());
     try {
-      user = myUser;
-      allUser.map((user) => users.add(user)).toList();
+      users = await _repository.getAllUsers();
       emit(SuccessUserFacebookState());
+      return users;
     } catch (error) {
       print(error.toString());
       emit(ErrorUserFacebookState());
+      return [];
     }
   }
 
-  void getUserStory() {
-    clearAllData(stories);
+  Future<List<Story>> getUserStory() async {
+    // clearAllData(stories);
     emit(LoadingStoryFacebookState());
     try {
-      story = myStory;
-      allStory.map((story) => stories.add(story)).toList();
+      stories = await _repository.getAllStories();
+      // print(stories);
       emit(SuccessStoryFacebookState());
+      return stories;
     } catch (error) {
       print(error.toString());
       emit(ErrorStoryFacebookState());
+      return [];
     }
   }
 
-  void getPostData() {
-    clearAllData(posts);
-    if (textLineState.isNotEmpty) {
-      textLineState.clear();
-    }
+  Future<List<Post>> getPostData() async {
+    // clearAllData(posts);
+
     emit(LoadingPostFacebookState());
     try {
-      post = myPost;
-      allPost.map((post) {
-        posts.add(post);
-        textLineState.addAll({post.id: false});
-      }).toList();
-
+      posts = await _repository.getAllPosts();
+      addLineState(posts);
       emit(SuccessPostFacebookState());
+      return posts;
     } catch (error) {
       print(error.toString());
       emit(ErrorPostFacebookState());
+      return [];
     }
+  }
+
+  void addLineState(List<Post> posts) {
+    /*if (textLineState.isNotEmpty) {
+      textLineState.clear();
+    } else {*/
+    posts.forEach(
+      (post) => textLineState.addAll({post.id: false}),
+    );
+    // }
   }
 
   void clearAllData(List<dynamic> data) {

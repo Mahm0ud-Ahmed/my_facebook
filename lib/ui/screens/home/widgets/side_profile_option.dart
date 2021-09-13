@@ -1,5 +1,4 @@
 import 'package:facebook_app/repository/user_data.dart';
-import 'package:facebook_app/ui/constant_ui.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

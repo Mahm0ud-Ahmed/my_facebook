@@ -1,16 +1,14 @@
 import 'dart:ui';
-
-import 'package:facebook_app/entities/model/story.dart';
-import 'package:facebook_app/entities/model/user.dart';
 import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
 import 'package:facebook_app/logic/state/facebook_state.dart';
+import 'package:facebook_app/model/story.dart';
+import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/platform.dart';
-import 'package:facebook_app/repository/user_data.dart';
-import 'package:facebook_app/repository/user_story.dart';
 import 'package:facebook_app/ui/constant_ui.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../size_config.dart';
 
@@ -23,14 +21,14 @@ class CreateStory extends StatefulWidget {
 
 class _CreateStoryState extends State<CreateStory> {
   late FacebookCubit _cubit;
-  bool _visibile = false;
+  bool _visible = false;
 
   @override
   void initState() {
     _cubit = FacebookCubit.get(context)..getUserStory();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        _visibile = true;
+        _visible = true;
       });
     });
     super.initState();
@@ -117,11 +115,11 @@ class _CreateStoryState extends State<CreateStory> {
   Widget buildProfileImageStory(int index, String url) {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 800),
-      top: _visibile ? 4 : -50,
+      top: _visible ? 4 : -50,
       left: 8,
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 500),
-        opacity: _visibile ? 1 : 0,
+        opacity: _visible ? 1 : 0,
         child: index == 0
             ? const CircleAvatar(
                 radius: 18,
@@ -159,6 +157,15 @@ class _CreateStoryState extends State<CreateStory> {
             : customTextTitle(
                 context: context, text: userName, textColor: foregroundColor),
       ),
+    );
+  }
+
+  Widget listener() {
+    return BlocListener<FacebookCubit, FacebookState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      child: Container(),
     );
   }
 }

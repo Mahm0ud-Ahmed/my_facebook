@@ -1,12 +1,9 @@
-import 'package:facebook_app/entities/model/user.dart';
 import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
 import 'package:facebook_app/logic/state/facebook_state.dart';
-import 'package:facebook_app/repository/user_data.dart';
-import 'package:facebook_app/ui/constant_ui.dart';
+import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SideFacebookMessenger extends StatefulWidget {
   const SideFacebookMessenger({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:facebook_app/entities/model/story.dart';
+import 'package:facebook_app/model/story.dart';
 
 Story myStory = Story(
   id: 1,

@@ -1,6 +1,7 @@
 import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
 import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/platform.dart';
+import 'package:facebook_app/repository/user_data.dart';
 import 'package:facebook_app/size_config.dart';
 import 'package:facebook_app/ui/constant_ui.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
@@ -31,7 +32,7 @@ class _CreateHeaderState extends State<CreateHeader> {
         children: [
           BlocBuilder<FacebookCubit, FacebookState>(
             builder: (context, state) {
-              return buildCreatePost(context, _cubit.user.profileImage);
+              return buildCreatePost(context, myUser.profileImage);
             },
           ),
           const SizedBox(
