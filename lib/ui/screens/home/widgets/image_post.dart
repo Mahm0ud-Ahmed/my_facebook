@@ -36,7 +36,7 @@ class ImagePost extends StatelessWidget {
                     items: postImage
                         .map(
                           (image) => Image(
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                             image: NetworkImage(image),
                           ),
                         )
