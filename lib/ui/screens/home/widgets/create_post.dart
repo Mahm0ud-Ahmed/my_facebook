@@ -1,5 +1,3 @@
-import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
-import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/model/post.dart';
 import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/platform.dart';
@@ -9,6 +7,8 @@ import 'package:facebook_app/ui/screens/home/widgets/post_react.dart';
 import 'package:facebook_app/ui/screens/home/widgets/react_button.dart';
 import 'package:facebook_app/ui/screens/home/widgets/text_content.dart';
 import 'package:facebook_app/ui/screens/home/widgets/user_info.dart';
+import 'package:facebook_app/view_model/cubit/facebook_cubit.dart';
+import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,12 +39,12 @@ class _CreatePostState extends State<CreatePost> {
             separatorBuilder: (context, index) {
               return Container(
                 width: double.infinity,
-                height: 6,
+                height: 8,
                 color: dividerColor,
               );
             },
             shrinkWrap: true,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             itemCount: _cubit.posts.length,
             itemBuilder: (context, index) {
               final User user = _cubit.users[index];
@@ -85,7 +85,7 @@ class _CreatePostState extends State<CreatePost> {
         onPressed: () {
           _cubit.changeLineState(id);
         },
-        child: state ? const Text('See Less') : const Text('See More Detail'),
+        child: state ? const Text('See Less') : const Text('See More'),
       ),
     );
   }

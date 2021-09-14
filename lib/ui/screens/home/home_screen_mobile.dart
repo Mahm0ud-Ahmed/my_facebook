@@ -1,10 +1,10 @@
-import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
-import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/ui/constant_ui.dart';
 import 'package:facebook_app/ui/screens/home/widgets/app_bar_mobile.dart';
 import 'package:facebook_app/ui/screens/home/widgets/create_header.dart';
 import 'package:facebook_app/ui/screens/home/widgets/create_post.dart';
 import 'package:facebook_app/ui/screens/home/widgets/create_story.dart';
+import 'package:facebook_app/view_model/cubit/facebook_cubit.dart';
+import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

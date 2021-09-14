@@ -51,7 +51,7 @@ class SideProfileOption extends StatelessWidget {
             height: 24,
           ),
           ListView.builder(
-            physics: ClampingScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: icons.length,
             itemBuilder: (context, index) {

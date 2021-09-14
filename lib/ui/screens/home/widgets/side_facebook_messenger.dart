@@ -1,7 +1,7 @@
-import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
-import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
+import 'package:facebook_app/view_model/cubit/facebook_cubit.dart';
+import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,10 +52,10 @@ class _SideFacebookMessengerState extends State<SideFacebookMessenger> {
             builder: (context, state) {
               return ListView.builder(
                 shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: _cubit.users.length,
                 itemBuilder: (context, index) {
-                  User currentUser = _cubit.users[index];
+                  final User currentUser = _cubit.users[index];
                   return index > 0
                       ? Padding(
                           padding: const EdgeInsets.only(bottom: 16),

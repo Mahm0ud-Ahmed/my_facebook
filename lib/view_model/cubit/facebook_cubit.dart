@@ -1,8 +1,8 @@
-import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/model/post.dart';
 import 'package:facebook_app/model/story.dart';
 import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/repository/facebook_repository.dart';
+import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,15 +15,12 @@ class FacebookCubit extends Cubit<FacebookState> {
   final FacebookRepository _repository = FacebookRepository.getInstance();
 
   List<User> users = [];
-
   List<Story> stories = [];
-
   List<Post> posts = [];
 
   Map<int, bool> textLineState = {};
 
   Future<List<User>> getUserInfo() async {
-    // clearAllData(users);
     emit(LoadingUserFacebookState());
     try {
       users = await _repository.getAllUsers();
@@ -37,11 +34,9 @@ class FacebookCubit extends Cubit<FacebookState> {
   }
 
   Future<List<Story>> getUserStory() async {
-    // clearAllData(stories);
     emit(LoadingStoryFacebookState());
     try {
       stories = await _repository.getAllStories();
-      // print(stories);
       emit(SuccessStoryFacebookState());
       return stories;
     } catch (error) {
@@ -52,8 +47,6 @@ class FacebookCubit extends Cubit<FacebookState> {
   }
 
   Future<List<Post>> getPostData() async {
-    // clearAllData(posts);
-
     emit(LoadingPostFacebookState());
     try {
       posts = await _repository.getAllPosts();
@@ -68,19 +61,9 @@ class FacebookCubit extends Cubit<FacebookState> {
   }
 
   void addLineState(List<Post> posts) {
-    /*if (textLineState.isNotEmpty) {
-      textLineState.clear();
-    } else {*/
     posts.forEach(
       (post) => textLineState.addAll({post.id: false}),
     );
-    // }
-  }
-
-  void clearAllData(List<dynamic> data) {
-    if (data.isNotEmpty) {
-      data.clear();
-    }
   }
 
   void changeLineState(int id) {

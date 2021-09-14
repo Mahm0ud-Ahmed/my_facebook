@@ -6,9 +6,7 @@ class Platform {
     return SizeConfig.screenWidth <= 900 ? true : false;
   }
 
-  static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width <= 900;
+  static bool isMobile(BuildContext context) => SizeConfig.screenWidth <= 900;
 
-  static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width > 900;
+  static bool isDesktop(BuildContext context) => SizeConfig.screenWidth > 900;
 }

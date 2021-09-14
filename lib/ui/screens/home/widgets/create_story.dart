@@ -1,14 +1,12 @@
-import 'dart:ui';
-import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
-import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/model/story.dart';
 import 'package:facebook_app/model/user.dart';
 import 'package:facebook_app/platform.dart';
 import 'package:facebook_app/ui/constant_ui.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
+import 'package:facebook_app/view_model/cubit/facebook_cubit.dart';
+import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../size_config.dart';
 
@@ -60,8 +58,8 @@ class _CreateStoryState extends State<CreateStory> {
                 );
               },
               itemBuilder: (context, index) {
-                User user = _cubit.users[index];
-                Story story = _cubit.stories[index];
+                final User user = _cubit.users[index];
+                final Story story = _cubit.stories[index];
                 // print(_cubit.stories.length);
                 return buildStoryItem(
                     context: context,
@@ -93,7 +91,7 @@ class _CreateStoryState extends State<CreateStory> {
           child: InkWell(
             onTap: onClick,
             child: Image(
-              width: Platform.isDesktop(context) ? 110 : 110,
+              width: 110,
               height: 180,
               fit: BoxFit.cover,
               image: index == 0
@@ -115,7 +113,7 @@ class _CreateStoryState extends State<CreateStory> {
   Widget buildProfileImageStory(int index, String url) {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 800),
-      top: _visible ? 4 : -50,
+      top: _visible ? 4 : -55,
       left: 8,
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 500),

@@ -9,38 +9,40 @@ class ImagePost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        vertical: getProportionateScreenHeight(8),
-        horizontal: Platform.isDesktop(context)
-            ? getProportionateScreenWidth(2)
-            : getProportionateScreenWidth(0),
-      ),
-      child: postImage.isEmpty
-          ? Container()
-          : postImage.length == 1
-              ? Image(
-                  width: double.infinity,
-                  fit: BoxFit.contain,
-                  image: NetworkImage(postImage[0]),
-                )
-              : CarouselSlider(
-                  options: CarouselOptions(
-                    height: 400,
-                    aspectRatio: 2 / 3,
-                    viewportFraction: 0.75,
-                    enlargeCenterPage: true,
+    return Center(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(
+          vertical: getProportionateScreenHeight(8),
+          horizontal: Platform.isDesktop(context)
+              ? getProportionateScreenWidth(2)
+              : getProportionateScreenWidth(0),
+        ),
+        child: postImage.isEmpty
+            ? Container()
+            : postImage.length == 1
+                ? Image(
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                    image: NetworkImage(postImage[0]),
+                  )
+                : CarouselSlider(
+                    options: CarouselOptions(
+                      height: 400,
+                      aspectRatio: 2 / 3,
+                      viewportFraction: 0.75,
+                      enlargeCenterPage: true,
+                    ),
+                    items: postImage
+                        .map(
+                          (image) => Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(image),
+                          ),
+                        )
+                        .toList(),
                   ),
-                  items: postImage
-                      .map(
-                        (image) => Image(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(image),
-                        ),
-                      )
-                      .toList(),
-                ),
+      ),
     );
   }
 }

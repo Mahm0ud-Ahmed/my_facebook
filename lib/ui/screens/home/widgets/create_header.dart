@@ -1,10 +1,10 @@
-import 'package:facebook_app/logic/cubit/facebook_cubit.dart';
-import 'package:facebook_app/logic/state/facebook_state.dart';
 import 'package:facebook_app/platform.dart';
 import 'package:facebook_app/repository/user_data.dart';
 import 'package:facebook_app/size_config.dart';
 import 'package:facebook_app/ui/constant_ui.dart';
 import 'package:facebook_app/ui/styled_componants/component.dart';
+import 'package:facebook_app/view_model/cubit/facebook_cubit.dart';
+import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
