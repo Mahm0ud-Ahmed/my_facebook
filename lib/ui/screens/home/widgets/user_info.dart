@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../size_config.dart';
 import '../../../constant_ui.dart';
 
-class UserInfo extends StatelessWidget {
+class UserInfo extends StatefulWidget {
   const UserInfo({
     Key? key,
     required this.post,
@@ -15,6 +15,23 @@ class UserInfo extends StatelessWidget {
   }) : super(key: key);
   final Post post;
   final User user;
+
+  @override
+  _UserInfoState createState() => _UserInfoState();
+}
+
+class _UserInfoState extends State<UserInfo> {
+  bool _visible = false;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _visible = true;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +44,29 @@ class UserInfo extends StatelessWidget {
       ),
       child: Row(
         children: [
-          buildImageProfile(
-              url: user.profileImage,
-              state: user.state,
-              onClick: () {
-                print(user.userName);
-              }),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 400),
+            height: _visible ? 45 : 0,
+            width: _visible ? 45 : 0,
+            child: buildImageProfile(
+                url: widget.user.profileImage,
+                state: widget.user.state,
+                onClick: () {
+                  print(widget.user.userName);
+                }),
+          ),
           const SizedBox(
             width: 8,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              customTextTitle(context: context, text: user.userName),
+              customTextTitle(context: context, text: widget.user.userName),
               Row(
                 children: [
-                  customTextInfo(context: context, text: '${post.timeAgo} • '),
+                  customTextInfo(
+                      context: context, text: '${widget.post.timeAgo} • '),
                   const Icon(
                     Icons.public,
                     color: grayColor,
