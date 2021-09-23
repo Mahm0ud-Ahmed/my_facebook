@@ -94,7 +94,6 @@ Widget customTextField({
       hintText: hintText,
       hintStyle: const TextStyle(fontSize: 14),
       border: OutlineInputBorder(
-        borderSide: const BorderSide(),
         borderRadius: BorderRadius.circular(40),
       ),
       filled: true,

@@ -24,7 +24,7 @@ class _CreateStoryState extends State<CreateStory> {
   @override
   void initState() {
     _cubit = FacebookCubit.get(context)..getUserStory();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 4), () {
       setState(() {
         _visible = true;
       });

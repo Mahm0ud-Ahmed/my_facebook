@@ -32,6 +32,7 @@ class ImagePost extends StatelessWidget {
                       aspectRatio: 2 / 3,
                       viewportFraction: 0.75,
                       enlargeCenterPage: true,
+                      enableInfiniteScroll: false,
                     ),
                     items: postImage
                         .map(
