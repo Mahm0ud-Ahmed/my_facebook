@@ -10,14 +10,14 @@ class CustomAppBarWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      height: 60.0,
+      height: 60,
       decoration: const BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
             offset: Offset(0, 4),
-            blurRadius: 4.0,
+            blurRadius: 4,
           ),
         ],
       ),

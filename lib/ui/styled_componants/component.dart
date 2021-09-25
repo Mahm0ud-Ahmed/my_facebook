@@ -24,7 +24,7 @@ Widget customBtnIcon({
 Widget buildImageProfile({
   required String url,
   required Function() onClick,
-  bool state = false,
+  bool onlineState = false,
 }) {
   return InkWell(
     onTap: onClick,
@@ -35,7 +35,7 @@ Widget buildImageProfile({
           radius: 24,
           backgroundImage: NetworkImage(url),
         ),
-        if (state)
+        if (onlineState)
           Container(
             width: 16,
             height: 16,

@@ -38,7 +38,7 @@ class _UserInfoState extends State<UserInfo> {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: getProportionateScreenHeight(12),
-        horizontal: Platform.isMobile(context)
+        horizontal: Platform.isMobile()
             ? getProportionateScreenWidth(10)
             : getProportionateScreenWidth(2),
       ),
@@ -50,7 +50,7 @@ class _UserInfoState extends State<UserInfo> {
             width: _visible ? 45 : 0,
             child: buildImageProfile(
                 url: widget.user.profileImage,
-                state: widget.user.state,
+                onlineState: widget.user.onlineState,
                 onClick: () {
                   print(widget.user.userName);
                 }),

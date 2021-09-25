@@ -15,34 +15,30 @@ class HomeScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: BlocBuilder<FacebookCubit, FacebookState>(
-        builder: (context, state) {
-          return CustomScrollView(
-            slivers: [
-              CustomAppBarMobile(),
-              const SliverToBoxAdapter(
-                child: CreateHeader(),
-              ),
-              const SliverPadding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 6,
-                ),
-                sliver: CreateStory(),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: CreatePost(),
-                    );
-                  },
-                  childCount: 1,
-                ),
-              ),
-            ],
-          );
-        },
+      body: CustomScrollView(
+        slivers: [
+          CustomAppBarMobile(),
+          const SliverToBoxAdapter(
+            child: CreateHeader(),
+          ),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(
+              vertical: 6,
+            ),
+            sliver: CreateStory(),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return const Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: CreatePost(),
+                );
+              },
+              childCount: 1,
+            ),
+          ),
+        ],
       ),
     );
   }

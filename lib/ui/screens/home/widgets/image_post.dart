@@ -14,7 +14,7 @@ class ImagePost extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.symmetric(
           vertical: getProportionateScreenHeight(8),
-          horizontal: Platform.isDesktop(context)
+          horizontal: Platform.isDesktop()
               ? getProportionateScreenWidth(2)
               : getProportionateScreenWidth(0),
         ),
@@ -28,7 +28,7 @@ class ImagePost extends StatelessWidget {
                   )
                 : CarouselSlider(
                     options: CarouselOptions(
-                      height: 400,
+                      height: Platform.isMobile() ? 300 : 400,
                       aspectRatio: 2 / 3,
                       viewportFraction: 0.75,
                       enlargeCenterPage: true,

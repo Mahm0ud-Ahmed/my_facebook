@@ -24,24 +24,21 @@ class _TextContentState extends State<TextContent> {
   @override
   void initState() {
     _cubit = FacebookCubit.get(context);
-    lineState = _cubit.textLineState[widget.post.id]!;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    lineState = _cubit.textLineState[widget.post.id]!;
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: getProportionateScreenHeight(10),
-        horizontal: Platform.isMobile(context)
+        horizontal: Platform.isMobile()
             ? getProportionateScreenWidth(6)
             : getProportionateScreenWidth(2),
       ),
-      child: BlocBuilder<FacebookCubit, FacebookState>(
-        builder: (context, state) {
-          lineState = _cubit.textLineState[widget.post.id]!;
-          if (widget.post.textBody.isNotEmpty) {
-            return Column(
+      child: widget.post.textBody.isNotEmpty
+          ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (lineState)
@@ -65,19 +62,15 @@ class _TextContentState extends State<TextContent> {
                     _cubit.textLineState.keys.elementAt(widget.index as int),
                     _cubit.textLineState[widget.post.id]!)
               ],
-            );
-          } else {
-            return Container();
-          }
-        },
-      ),
+            )
+          : Container(),
     );
   }
 
   Widget buildStateButton(BuildContext context, int id, bool state) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: Platform.isDesktop(context)
+        horizontal: Platform.isDesktop()
             ? getProportionateScreenWidth(2)
             : getProportionateScreenWidth(0),
       ),

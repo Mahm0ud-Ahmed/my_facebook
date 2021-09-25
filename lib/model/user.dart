@@ -2,12 +2,12 @@ class User {
   int id;
   String userName;
   String profileImage;
-  bool state;
+  bool onlineState;
 
   User({
     required this.id,
     required this.userName,
     required this.profileImage,
-    required this.state,
+    required this.onlineState,
   });
 }

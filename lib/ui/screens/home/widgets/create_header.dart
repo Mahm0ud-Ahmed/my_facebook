@@ -8,21 +8,8 @@ import 'package:facebook_app/view_model/state/facebook_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateHeader extends StatefulWidget {
+class CreateHeader extends StatelessWidget {
   const CreateHeader({Key? key}) : super(key: key);
-
-  @override
-  _CreateHeaderState createState() => _CreateHeaderState();
-}
-
-class _CreateHeaderState extends State<CreateHeader> {
-  late FacebookCubit _cubit;
-
-  @override
-  void initState() {
-    _cubit = FacebookCubit.get(context)..getUserInfo();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +17,7 @@ class _CreateHeaderState extends State<CreateHeader> {
       color: foregroundColor,
       child: Column(
         children: [
-          BlocBuilder<FacebookCubit, FacebookState>(
-            builder: (context, state) {
-              return buildCreatePost(context, myUser.profileImage);
-            },
-          ),
+          buildCreatePost(context, myUser.profileImage),
           const SizedBox(
             height: 8,
           ),
@@ -50,11 +33,10 @@ class _CreateHeaderState extends State<CreateHeader> {
   Widget buildCreatePost(BuildContext context, String profileImage) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: Platform.isDesktop(context)
+        horizontal: Platform.isDesktop()
             ? getProportionateScreenWidth(2)
             : getProportionateScreenWidth(4),
-        vertical:
-            Platform.isDesktop(context) ? getProportionateScreenHeight(12) : 0,
+        vertical: Platform.isDesktop() ? getProportionateScreenHeight(12) : 0,
       ),
       child: Row(
         children: [
@@ -76,8 +58,8 @@ class _CreateHeaderState extends State<CreateHeader> {
 
   Widget buildRowItem(BuildContext context) {
     return IntrinsicHeight(
-      child: Container(
-        height: Platform.isMobile(context) ? 40 : 50,
+      child: SizedBox(
+        height: Platform.isMobile() ? 40 : 50,
         child: Row(
           children: [
             customBtnIcon(

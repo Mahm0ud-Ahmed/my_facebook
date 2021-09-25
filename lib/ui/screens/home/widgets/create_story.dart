@@ -23,7 +23,9 @@ class _CreateStoryState extends State<CreateStory> {
 
   @override
   void initState() {
-    _cubit = FacebookCubit.get(context)..getUserStory();
+    _cubit = FacebookCubit.get(context)
+      ..getUserStory()
+      ..getUserInfo();
     Future.delayed(const Duration(seconds: 4), () {
       setState(() {
         _visible = true;
@@ -38,11 +40,9 @@ class _CreateStoryState extends State<CreateStory> {
       child: Container(
         color: foregroundColor,
         height: 200,
-        width: Platform.isDesktop(context)
-            ? getProportionateScreenWidth(100)
-            : getProportionateScreenWidth(100),
+        width: double.infinity,
         padding: EdgeInsets.symmetric(
-          horizontal: Platform.isMobile(context)
+          horizontal: Platform.isMobile()
               ? getProportionateScreenWidth(8)
               : getProportionateScreenWidth(4),
           vertical: getProportionateScreenHeight(8),
@@ -50,6 +50,7 @@ class _CreateStoryState extends State<CreateStory> {
         child: BlocBuilder<FacebookCubit, FacebookState>(
           builder: (context, state) {
             return ListView.separated(
+              physics: const ScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: _cubit.stories.length,
               separatorBuilder: (BuildContext context, int index) {
@@ -60,7 +61,6 @@ class _CreateStoryState extends State<CreateStory> {
               itemBuilder: (context, index) {
                 final User user = _cubit.users[index];
                 final Story story = _cubit.stories[index];
-                // print(_cubit.stories.length);
                 return buildStoryItem(
                     context: context,
                     index: index,

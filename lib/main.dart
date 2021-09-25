@@ -3,6 +3,7 @@ import 'package:facebook_app/size_config.dart';
 import 'package:facebook_app/ui/screens/home/home_screen_web.dart';
 import 'package:facebook_app/ui/styled_componants/style.dart';
 import 'package:facebook_app/view_model/cubit/facebook_cubit.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,12 +21,13 @@ class FacebookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      scrollBehavior: MyCustomScrollBehavior(),
       title: 'Facebook UI',
       theme: appThem,
       home: BlocProvider<FacebookCubit>(
         create: (context) => FacebookCubit(),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+        child: Builder(
+          builder: (BuildContext context) {
             SizeConfig().init(context);
             return Platform().deviceType()
                 ? const HomeScreenMobile()
@@ -35,4 +37,12 @@ class FacebookApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

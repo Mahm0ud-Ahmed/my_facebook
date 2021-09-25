@@ -73,20 +73,4 @@ class _CreatePostState extends State<CreatePost> {
       ),
     );
   }
-
-  Widget buildStateButton(BuildContext context, int id, bool state) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Platform.isDesktop(context)
-            ? getProportionateScreenWidth(2)
-            : getProportionateScreenWidth(0),
-      ),
-      child: TextButton(
-        onPressed: () {
-          _cubit.changeLineState(id);
-        },
-        child: state ? const Text('See Less') : const Text('See More'),
-      ),
-    );
-  }
 }

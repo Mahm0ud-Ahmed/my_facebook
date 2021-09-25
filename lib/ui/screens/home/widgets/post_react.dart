@@ -10,12 +10,13 @@ import '../../../constant_ui.dart';
 class PostReact extends StatelessWidget {
   const PostReact({Key? key, required this.post}) : super(key: key);
   final Post post;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: getProportionateScreenHeight(6),
-        horizontal: Platform.isMobile(context)
+        horizontal: Platform.isMobile()
             ? getProportionateScreenWidth(10)
             : getProportionateScreenWidth(2),
       ),

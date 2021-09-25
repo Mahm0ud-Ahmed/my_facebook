@@ -23,15 +23,15 @@ class HomeScreenWeb extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              child: Container(
+            const Flexible(
+              child: SizedBox(
                 width: 300,
-                child: const SideProfileOption(),
+                child: SideProfileOption(),
               ),
             ),
             Flexible(
               flex: 2,
-              child: Container(
+              child: SizedBox(
                 width: 800,
                 child: CustomScrollView(
                   shrinkWrap: true,
@@ -58,10 +58,10 @@ class HomeScreenWeb extends StatelessWidget {
                 ),
               ),
             ),
-            Flexible(
-              child: Container(
+            const Flexible(
+              child: SizedBox(
                 width: 300,
-                child: const SideFacebookMessenger(),
+                child: SideFacebookMessenger(),
               ),
             ),
           ],

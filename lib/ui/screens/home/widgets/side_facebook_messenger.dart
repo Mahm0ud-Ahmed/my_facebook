@@ -64,7 +64,7 @@ class _SideFacebookMessengerState extends State<SideFacebookMessenger> {
                             leading: buildImageProfile(
                               url: currentUser.profileImage,
                               onClick: () {},
-                              state: currentUser.state,
+                              onlineState: currentUser.onlineState,
                             ),
                             title: customTextTitle(
                                 context: context, text: currentUser.userName),
