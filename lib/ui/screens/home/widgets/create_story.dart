@@ -59,8 +59,9 @@ class _CreateStoryState extends State<CreateStory> {
                 );
               },
               itemBuilder: (context, index) {
-                final User user = _cubit.users[index];
+                // final User user = _cubit.users[index];
                 final Story story = _cubit.stories[index];
+                final User user = _cubit.getUser(story.userId);
                 return buildStoryItem(
                     context: context,
                     index: index,

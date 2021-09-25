@@ -26,7 +26,10 @@ class _CreatePostState extends State<CreatePost> {
 
   @override
   void initState() {
-    _cubit = FacebookCubit.get(context)..getPostData();
+    _cubit = FacebookCubit.get(context)
+      ..getPostData()
+      ..getUserInfo();
+
     super.initState();
   }
 
@@ -47,8 +50,9 @@ class _CreatePostState extends State<CreatePost> {
             physics: const ScrollPhysics(),
             itemCount: _cubit.posts.length,
             itemBuilder: (context, index) {
-              final User user = _cubit.users[index];
               final Post post = _cubit.posts[index];
+              // final User user = _cubit.users[index];
+              final User user = _cubit.getUser(post.userId);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

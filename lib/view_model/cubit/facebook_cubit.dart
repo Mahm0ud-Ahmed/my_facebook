@@ -70,4 +70,14 @@ class FacebookCubit extends Cubit<FacebookState> {
     textLineState[id] = !textLineState[id]!;
     emit(ChangeTextLineState());
   }
+
+  User getUser(int userId) {
+    return users.firstWhere((element) {
+      if (element.id == userId) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 }
