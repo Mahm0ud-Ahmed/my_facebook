@@ -15,6 +15,8 @@ class SideFacebookMessenger extends StatefulWidget {
 class _SideFacebookMessengerState extends State<SideFacebookMessenger> {
   late FacebookCubit _cubit;
 
+  List<User> _users = [];
+
   @override
   void initState() {
     _cubit = FacebookCubit.get(context)..getUserStory();
@@ -48,14 +50,19 @@ class _SideFacebookMessengerState extends State<SideFacebookMessenger> {
           const SizedBox(
             height: 8,
           ),
-          BlocBuilder<FacebookCubit, FacebookState>(
+          BlocConsumer<FacebookCubit, FacebookState>(
+            listener: (context, state) {
+              if (state is SuccessUserFacebookState) {
+                _users = state.users;
+              }
+            },
             builder: (context, state) {
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: _cubit.users.length,
+                itemCount: _users.length,
                 itemBuilder: (context, index) {
-                  final User currentUser = _cubit.users[index];
+                  final User currentUser = _users[index];
                   return index > 0
                       ? Padding(
                           padding: const EdgeInsets.only(bottom: 16),

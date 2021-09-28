@@ -21,11 +21,13 @@ class _CreateStoryState extends State<CreateStory> {
   late FacebookCubit _cubit;
   bool _visible = false;
 
+  List<Story> _stories = [];
+  List<User> _users = [];
+
   @override
   void initState() {
-    _cubit = FacebookCubit.get(context)
-      ..getUserStory()
-      ..getUserInfo();
+    _cubit = FacebookCubit.get(context)..getUserStory();
+
     Future.delayed(const Duration(seconds: 4), () {
       setState(() {
         _visible = true;
@@ -47,31 +49,42 @@ class _CreateStoryState extends State<CreateStory> {
               : getProportionateScreenWidth(4),
           vertical: getProportionateScreenHeight(8),
         ),
-        child: BlocBuilder<FacebookCubit, FacebookState>(
+        child: BlocConsumer<FacebookCubit, FacebookState>(
+          listener: (context, state) {
+            if (state is SuccessStoryFacebookState) {
+              _stories = state.stories;
+            }
+            if (state is SuccessUserFacebookState) {
+              _users = state.users;
+            }
+          },
           builder: (context, state) {
-            return ListView.separated(
-              physics: const ScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: _cubit.stories.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  width: 8,
-                );
-              },
-              itemBuilder: (context, index) {
-                // final User user = _cubit.users[index];
-                final Story story = _cubit.stories[index];
-                final User user = _cubit.getUser(story.userId);
-                return buildStoryItem(
-                    context: context,
-                    index: index,
-                    story: story,
-                    user: user,
-                    onClick: () {
-                      print('Story ${_cubit.users[index].userName}');
-                    });
-              },
-            );
+            if (_users.isNotEmpty) {
+              return ListView.separated(
+                physics: const ScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: _stories.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    width: 8,
+                  );
+                },
+                itemBuilder: (context, index) {
+                  // final User user = _cubit.users[index];
+                  final Story story = _stories[index];
+                  final User user = _cubit.getUser(_users, story.userId);
+                  return buildStoryItem(
+                      context: context,
+                      index: index,
+                      story: story,
+                      user: user,
+                      onClick: () {
+                        print('Story ${_users[index].userName}');
+                      });
+                },
+              );
+            }
+            return Container();
           },
         ),
       ),

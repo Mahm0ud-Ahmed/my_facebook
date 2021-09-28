@@ -24,55 +24,69 @@ class CreatePost extends StatefulWidget {
 class _CreatePostState extends State<CreatePost> {
   late FacebookCubit _cubit;
 
+  List<Post> _posts = [];
+  List<User> _users = [];
+
   @override
   void initState() {
     _cubit = FacebookCubit.get(context)
       ..getPostData()
       ..getUserInfo();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: BlocBuilder<FacebookCubit, FacebookState>(
+      child: BlocConsumer<FacebookCubit, FacebookState>(
+        listener: (context, state) {
+          if (state is SuccessPostFacebookState) {
+            _posts = state.posts;
+          }
+          if (state is SuccessUserFacebookState) {
+            _users = state.users;
+          }
+        },
         builder: (context, state) {
-          return ListView.separated(
-            separatorBuilder: (context, index) {
-              return Container(
-                width: double.infinity,
-                height: 8,
-                color: dividerColor,
-              );
-            },
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            itemCount: _cubit.posts.length,
-            itemBuilder: (context, index) {
-              final Post post = _cubit.posts[index];
-              // final User user = _cubit.users[index];
-              final User user = _cubit.getUser(post.userId);
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  UserInfo(post: post, user: user),
-                  TextContent(
-                    post: post,
-                    index: index,
-                  ),
-                  ImagePost(
-                    postImage: post.postImage,
-                  ),
-                  PostReact(post: post),
-                  const Divider(
-                    color: dividerColor,
-                  ),
-                  const ReactButton(),
-                ],
-              );
-            },
-          );
+          if (_users.isNotEmpty) {
+            return ListView.separated(
+              separatorBuilder: (context, index) {
+                return Container(
+                  width: double.infinity,
+                  height: 8,
+                  color: dividerColor,
+                );
+              },
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              itemCount: _posts.length,
+              itemBuilder: (context, index) {
+                final Post post = _posts[index];
+                // final User user = _cubit.users[index];
+                final User user = _cubit.getUser(_users, post.userId);
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UserInfo(post: post, user: user),
+                    TextContent(
+                      post: post,
+                      index: index,
+                    ),
+                    ImagePost(
+                      postImage: post.postImage,
+                    ),
+                    PostReact(post: post),
+                    const Divider(
+                      color: dividerColor,
+                    ),
+                    const ReactButton(),
+                  ],
+                );
+              },
+            );
+          }
+          return Container();
         },
       ),
     );

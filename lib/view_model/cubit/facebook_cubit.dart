@@ -14,50 +14,34 @@ class FacebookCubit extends Cubit<FacebookState> {
 
   final FacebookRepository _repository = FacebookRepository.getInstance();
 
-  List<User> users = [];
-  List<Story> stories = [];
-  List<Post> posts = [];
-
   Map<int, bool> textLineState = {};
 
-  Future<List<User>> getUserInfo() async {
-    emit(LoadingUserFacebookState());
-    try {
-      users = await _repository.getAllUsers();
-      emit(SuccessUserFacebookState());
-      return users;
-    } catch (error) {
+  void getUserInfo() {
+    _repository.getAllUsers().then((data) {
+      emit(SuccessUserFacebookState(users: data));
+    }).catchError((error) {
       print(error.toString());
       emit(ErrorUserFacebookState());
-      return [];
-    }
+    });
   }
 
-  Future<List<Story>> getUserStory() async {
-    emit(LoadingStoryFacebookState());
-    try {
-      stories = await _repository.getAllStories();
-      emit(SuccessStoryFacebookState());
-      return stories;
-    } catch (error) {
+  void getUserStory() {
+    _repository.getAllStories().then((data) {
+      emit(SuccessStoryFacebookState(stories: data));
+    }).catchError((error) {
       print(error.toString());
       emit(ErrorStoryFacebookState());
-      return [];
-    }
+    });
   }
 
-  Future<List<Post>> getPostData() async {
-    emit(LoadingPostFacebookState());
-    try {
-      posts = await _repository.getAllPosts();
-      addLineState(posts);
-      emit(SuccessPostFacebookState());
-      return posts;
-    } catch (error) {
+  void getPostData() {
+    _repository.getAllPosts().then((data) {
+      addLineState(data);
+      emit(SuccessPostFacebookState(posts: data));
+    }).catchError((error) {
       print(error.toString());
       emit(ErrorPostFacebookState());
-      return [];
-    }
+    });
   }
 
   void addLineState(List<Post> posts) {
@@ -71,7 +55,7 @@ class FacebookCubit extends Cubit<FacebookState> {
     emit(ChangeTextLineState());
   }
 
-  User getUser(int userId) {
+  User getUser(List<User> users, int userId) {
     return users.firstWhere((element) {
       if (element.id == userId) {
         return true;
